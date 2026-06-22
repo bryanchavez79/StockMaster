@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, send_file
 from pathlib import Path
 import base_datos
 from productos import Producto
@@ -18,6 +18,34 @@ def obtener_productos_dict(productos):
         }
         for producto in productos
     ]
+
+
+def obtener_archivos_disponibles():
+    """Obtiene lista de archivos de reportes disponibles"""
+    reportes_dir = Path(__file__).parent / "reportes"
+    datos_dir = Path(__file__).parent / "datos"
+    
+    archivos = []
+    
+    if reportes_dir.exists():
+        for archivo in reportes_dir.glob("*.txt"):
+            archivos.append({
+                "nombre": archivo.name,
+                "tipo": "txt",
+                "ruta": f"reportes/{archivo.name}",
+                "tamaño": f"{archivo.stat().st_size} bytes"
+            })
+    
+    if datos_dir.exists():
+        for archivo in datos_dir.glob("*.csv"):
+            archivos.append({
+                "nombre": archivo.name,
+                "tipo": "csv",
+                "ruta": f"datos/{archivo.name}",
+                "tamaño": f"{archivo.stat().st_size} bytes"
+            })
+    
+    return sorted(archivos, key=lambda x: x["nombre"], reverse=True)
 
 
 @app.route("/")
@@ -94,7 +122,8 @@ def eliminar_producto(codigo):
 @app.route("/reportes")
 def reportes():
     productos = base_datos.obtener_productos()
-    return render_template("reportes.html", productos=obtener_productos_dict(productos))
+    archivos = obtener_archivos_disponibles()
+    return render_template("reportes.html", productos=obtener_productos_dict(productos), archivos=archivos)
 
 
 @app.route("/reportes/generar", methods=["POST"])
@@ -121,6 +150,29 @@ def generar_reporte():
         flash(f"Error al generar reporte: {error}", "danger")
 
     return redirect(url_for("reportes"))
+
+
+@app.route("/descargar/<path:ruta>")
+def descargar_archivo(ruta):
+    """Descarga un archivo de reportes o datos"""
+    base_dir = Path(__file__).parent
+    archivo_path = base_dir / ruta
+    
+    # Validar que el archivo existe y está dentro del directorio permitido
+    if not archivo_path.exists() or not archivo_path.is_file():
+        flash("Archivo no encontrado.", "danger")
+        return redirect(url_for("reportes"))
+    
+    # Verificar que el archivo está en los directorios permitidos
+    if not (ruta.startswith("reportes/") or ruta.startswith("datos/")):
+        flash("Acceso denegado.", "danger")
+        return redirect(url_for("reportes"))
+    
+    return send_file(
+        archivo_path,
+        as_attachment=True,
+        download_name=archivo_path.name
+    )
 
 
 if __name__ == "__main__":
