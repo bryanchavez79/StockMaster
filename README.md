@@ -2,6 +2,8 @@
 
 StockMaster es un sistema de gestión de inventario modular y fácil de extender.
 
+Repositorio: https://github.com/bryanchavez79/StockMaster
+
 ## Estructura del proyecto
 
 - `main.py` - punto de entrada de la aplicación.
