@@ -50,8 +50,32 @@ def obtener_archivos_disponibles():
 
 @app.route("/")
 def inicio():
-    productos = base_datos.obtener_productos()
-    return render_template("index.html", productos=obtener_productos_dict(productos))
+    search = request.args.get("search", "").strip() or None
+    categoria = request.args.get("categoria", "").strip() or None
+    stock_bajo = request.args.get("stock_bajo") == "1"
+    sort_by = request.args.get("sort_by", "nombre")
+    sort_dir = request.args.get("sort_dir", "asc")
+
+    stock_umbral = 5 if stock_bajo else None
+    productos = base_datos.obtener_productos_filtrados(
+        search=search,
+        categoria=categoria,
+        stock_bajo=stock_umbral,
+        sort_by=sort_by,
+        sort_dir=sort_dir,
+    )
+    categorias = base_datos.obtener_categorias()
+
+    return render_template(
+        "index.html",
+        productos=obtener_productos_dict(productos),
+        categorias=categorias,
+        search=search,
+        categoria=categoria,
+        stock_bajo=stock_bajo,
+        sort_by=sort_by,
+        sort_dir=sort_dir,
+    )
 
 
 @app.route("/producto/nuevo", methods=["GET", "POST"])
@@ -134,8 +158,8 @@ def generar_reporte():
     try:
         if tipo == "inventario":
             base_datos.generar_reporte_inventario()
-            base_datos.exportar_productos_csv()
-            flash("Reporte de inventario generado.", "success")
+            base_datos.exportar_inventario_csv()
+            flash("Reporte de inventario generado. Descarga el archivo CSV inventario.csv para una planilla completa.", "success")
         elif tipo == "stock_bajo":
             base_datos.generar_reporte_stock_bajo(umbral)
             base_datos.exportar_stock_bajo_csv(umbral)
@@ -177,4 +201,4 @@ def descargar_archivo(ruta):
 
 if __name__ == "__main__":
     base_datos.inicializar()
-    app.run(debug=True, host="127.0.0.1", port=5000, ssl_context=None)
+    app.run(debug=True, host="0.0.0.0", port=5000, ssl_context=None)

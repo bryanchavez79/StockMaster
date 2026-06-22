@@ -106,6 +106,27 @@ http://stockmaster:5000
    http://127.0.0.1:5000
    ```
 
+### Acceso desde otra computadora en la red
+
+La aplicación está configurada para aceptar conexiones desde cualquier IP en tu red local.
+
+1. En el servidor (donde corre `python app.py`), ejecuta:
+   ```bash
+   python get_ip.py
+   ```
+   Esto mostrará la dirección IP del servidor (ej: `192.168.1.50`)
+
+2. Desde la otra PC, abre el navegador e ingresa:
+   ```
+   http://<IP-del-servidor>:5000
+   ```
+   Por ejemplo: `http://192.168.1.50:5000`
+
+3. Requisitos:
+   - Ambas computadoras en la misma red local (Wi-Fi o Ethernet)
+   - El puerto `5000` debe estar **abierto en el firewall** del servidor
+   - El servicio Flask debe estar ejecutándose (`python app.py`)
+
 5. Desde la web podrás:
    - ver y administrar productos
    - crear, editar y eliminar productos
@@ -165,16 +186,32 @@ python main.py
    - `3` Ambos
 4. Revisa los archivos generados en `reportes/` y `datos/`.
 
+   - El reporte de inventario también genera `datos/inventario.csv`, que es la planilla ideal para comparar el stock físico con el sistema.
+
+## Ejemplo de inventario físico en CSV
+
+El reporte de inventario físico genera un archivo `datos/inventario.csv` con estas columnas:
+
+```csv
+codigo,nombre,categoria,precio,stock
+P001,Manzana,Fruta,0.50,100
+P002,Arroz,Alimentos,1.20,50
+P003,Leche,Lacteos,0.80,30
+```
+
+Este archivo se puede abrir en Excel o Google Sheets para comparar los datos físicos contra el sistema.
+
 ### Descarga de reportes desde la web
 
 1. Abre la interfaz web en `http://stockmaster:5000`
 2. Haz clic en el menú **Reportes**
 3. Completa el formulario:
-   - Selecciona el tipo de reporte
+   - Selecciona el tipo de reporte (`Inventario físico` para la planilla completa)
    - Ingresa el umbral (si aplica)
    - Haz clic en **Generar**
 4. Los reportes se generan automáticamente
 5. En la sección **Reportes disponibles para descargar** encontrarás todos los archivos
+   - Busca `inventario.csv` para descargar la planilla completa con `codigo`, `nombre`, `categoria`, `precio` y `stock`
 6. Haz clic en **Descargar** para obtener el archivo
 
 ## Formato de CSV para importación
