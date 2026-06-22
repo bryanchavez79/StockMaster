@@ -2,7 +2,7 @@
 
 StockMaster es un sistema de gestión de inventario modular y fácil de extender.
 
-Repositorio: https://github.com/bryanchavez79/StockMaster
+Repositorio GitHub: [StockMaster en GitHub](https://github.com/bryanchavez79/StockMaster)
 
 ## Estructura del proyecto
 
