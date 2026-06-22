@@ -6,6 +6,8 @@ Repositorio GitHub: [StockMaster](https://github.com/bryanchavez79/StockMaster)
 
 [![StockMaster](https://img.shields.io/badge/Repo-StockMaster-blue)](https://github.com/bryanchavez79/StockMaster)
 
+> **¡Pruébalo localmente!** Ejecuta `python app.py` y abre `http://127.0.0.1:5000` para ver la interfaz web.
+
 ## Estructura del proyecto
 
 - `main.py` - punto de entrada de la aplicación.
