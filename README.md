@@ -2,6 +2,12 @@
 
 StockMaster es un sistema de gestión de inventario modular y fácil de extender.
 
+Repositorio GitHub: [StockMaster](https://github.com/bryanchavez79/StockMaster)
+
+[![StockMaster](https://img.shields.io/badge/Repo-StockMaster-blue)](https://github.com/bryanchavez79/StockMaster)
+
+> **¡Pruébalo localmente!** Ejecuta `python app.py` y abre `http://stockmaster:5000` en el navegador.
+
 ## Estructura del proyecto
 
 - `main.py` - punto de entrada de la aplicación.
@@ -12,6 +18,16 @@ StockMaster es un sistema de gestión de inventario modular y fácil de extender
 - `datos/` - exportaciones de datos como CSV.
 - `imagenes/` - recursos gráficos o documentación visual.
 - `reportes/` - reportes de inventario en texto.
+
+## Estado actual del proyecto
+
+- Repositorio: https://github.com/bryanchavez79/StockMaster
+- Rama principal: `main`
+- Archivos clave:
+  - [`main.py`](main.py) - punto de entrada de la aplicación.
+  - [`interfaz.py`](interfaz.py) - menú principal y submenú de reportes.
+  - [`base_datos.py`](base_datos.py) - lógica de SQLite y operaciones CRUD.
+  - [`productos.py`](productos.py) - modelo `Producto` y validaciones.
 
 ## Funcionalidades actuales
 
@@ -26,6 +42,95 @@ StockMaster es un sistema de gestión de inventario modular y fácil de extender
 - Exportar inventario a CSV
 - Importar productos desde CSV
 - Generar reporte de inventario en texto
+
+## Instalación
+
+1. Asegúrate de tener Python 3.11 o superior instalado.
+2. Abre una terminal en la carpeta del proyecto `e:\StockMaster`.
+3. (Opcional) Crea un entorno virtual:
+
+```bash
+python -m venv .venv
+```
+
+4. Activa el entorno virtual:
+
+- PowerShell:
+  ```powershell
+  .\.venv\Scripts\Activate.ps1
+  ```
+- CMD:
+  ```cmd
+  .venv\Scripts\activate.bat
+  ```
+
+5. Ejecuta la aplicación de consola:
+
+```bash
+python main.py
+```
+
+### Interfaz web
+
+1. Instala Flask si aún no lo has hecho:
+
+```bash
+pip install Flask
+```
+
+2. Ejecuta la aplicación web:
+
+```bash
+python app.py
+```
+
+3. Configura el nombre de host `stockmaster` en tu sistema (opcional):
+
+   - **Windows**: Abre `C:\Windows\System32\drivers\etc\hosts` como administrador y agrega:
+     ```
+     127.0.0.1 stockmaster
+     ```
+   - **macOS/Linux**: Edita `/etc/hosts` y agrega:
+     ```
+     127.0.0.1 stockmaster
+     ```
+
+4. Abre en el navegador:
+
+```text
+http://stockmaster:5000
+```
+
+   Si no configuraste el archivo `hosts`, usa:
+   ```text
+   http://127.0.0.1:5000
+   ```
+
+### Acceso desde otra computadora en la red
+
+La aplicación está configurada para aceptar conexiones desde cualquier IP en tu red local.
+
+1. En el servidor (donde corre `python app.py`), ejecuta:
+   ```bash
+   python get_ip.py
+   ```
+   Esto mostrará la dirección IP del servidor (ej: `192.168.1.50`)
+
+2. Desde la otra PC, abre el navegador e ingresa:
+   ```
+   http://<IP-del-servidor>:5000
+   ```
+   Por ejemplo: `http://192.168.1.50:5000`
+
+3. Requisitos:
+   - Ambas computadoras en la misma red local (Wi-Fi o Ethernet)
+   - El puerto `5000` debe estar **abierto en el firewall** del servidor
+   - El servicio Flask debe estar ejecutándose (`python app.py`)
+
+5. Desde la web podrás:
+   - ver y administrar productos
+   - crear, editar y eliminar productos
+   - generar reportes de inventario, stock bajo y stock crítico
 
 ## Uso
 
@@ -47,6 +152,83 @@ python main.py
      - CSV
      - Ambos
 5. Para importar productos desde un archivo CSV, elige la opción "Importar desde CSV".
+
+## Pruebas rápidas
+
+1. Ejecuta `python main.py`.
+2. Elige `1` para agregar un producto y completa el formulario.
+3. Elige `2` para ver la lista de productos y confirmar que el producto quedó guardado.
+4. Elige `9` para ir al submenú de reportes.
+   - Selecciona `1` para generar inventario completo.
+   - Selecciona `2` para generar stock bajo.
+   - Selecciona `3` para generar stock crítico.
+   - Luego elige el formato de salida: `1` TXT, `2` CSV o `3` Ambos.
+5. Verifica los archivos generados en las carpetas `reportes/` y `datos/`.
+
+## Importación desde CSV
+
+1. Prepara un archivo CSV con las columnas:
+   `codigo,nombre,categoria,precio,stock`
+2. Elige la opción `10. Importar desde CSV` en el menú principal.
+3. Ingresa la ruta del archivo CSV a importar.
+4. El sistema agregará o actualizará los productos existentes según el `codigo`.
+
+## Generación de reportes
+
+1. Elige la opción `9. Reportes` en el menú principal.
+2. Selecciona el reporte que deseas generar:
+   - `1` Inventario completo
+   - `2` Stock bajo
+   - `3` Stock crítico
+3. Elige el tipo de salida:
+   - `1` TXT
+   - `2` CSV
+   - `3` Ambos
+4. Revisa los archivos generados en `reportes/` y `datos/`.
+
+   - El reporte de inventario también genera `datos/inventario.csv`, que es la planilla ideal para comparar el stock físico con el sistema.
+
+## Ejemplo de inventario físico en CSV
+
+El reporte de inventario físico genera un archivo `datos/inventario.csv` con estas columnas:
+
+```csv
+codigo,nombre,categoria,precio,stock
+P001,Manzana,Fruta,0.50,100
+P002,Arroz,Alimentos,1.20,50
+P003,Leche,Lacteos,0.80,30
+```
+
+Este archivo se puede abrir en Excel o Google Sheets para comparar los datos físicos contra el sistema.
+
+### Descarga de reportes desde la web
+
+1. Abre la interfaz web en `http://stockmaster:5000`
+2. Haz clic en el menú **Reportes**
+3. Completa el formulario:
+   - Selecciona el tipo de reporte (`Inventario físico` para la planilla completa)
+   - Ingresa el umbral (si aplica)
+   - Haz clic en **Generar**
+4. Los reportes se generan automáticamente
+5. En la sección **Reportes disponibles para descargar** encontrarás todos los archivos
+   - Busca `inventario.csv` para descargar la planilla completa con `codigo`, `nombre`, `categoria`, `precio` y `stock`
+6. Haz clic en **Descargar** para obtener el archivo
+
+## Formato de CSV para importación
+
+El archivo CSV debe tener estas columnas en la primera fila:
+
+```csv
+codigo,nombre,categoria,precio,stock
+P001,Manzana,Fruta,0.50,100
+P002,Arroz,Alimentos,1.20,50
+```
+
+- `codigo`: identificador único del producto
+- `nombre`: nombre del producto
+- `categoria`: categoría del producto
+- `precio`: precio unitario (número decimal)
+- `stock`: cantidad en inventario (entero)
 
 ## Archivos generados
 
