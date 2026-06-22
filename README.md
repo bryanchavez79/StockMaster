@@ -165,6 +165,18 @@ python main.py
    - `3` Ambos
 4. Revisa los archivos generados en `reportes/` y `datos/`.
 
+### Descarga de reportes desde la web
+
+1. Abre la interfaz web en `http://stockmaster:5000`
+2. Haz clic en el menú **Reportes**
+3. Completa el formulario:
+   - Selecciona el tipo de reporte
+   - Ingresa el umbral (si aplica)
+   - Haz clic en **Generar**
+4. Los reportes se generan automáticamente
+5. En la sección **Reportes disponibles para descargar** encontrarás todos los archivos
+6. Haz clic en **Descargar** para obtener el archivo
+
 ## Formato de CSV para importación
 
 El archivo CSV debe tener estas columnas en la primera fila:
