@@ -60,11 +60,36 @@ python -m venv .venv
   .venv\Scripts\activate.bat
   ```
 
-5. Ejecuta la aplicación:
+5. Ejecuta la aplicación de consola:
 
 ```bash
 python main.py
 ```
+
+### Interfaz web
+
+1. Instala Flask si aún no lo has hecho:
+
+```bash
+pip install Flask
+```
+
+2. Ejecuta la aplicación web:
+
+```bash
+python app.py
+```
+
+3. Abre en el navegador:
+
+```text
+http://127.0.0.1:5000
+```
+
+4. Desde la web podrás:
+   - ver y administrar productos
+   - crear, editar y eliminar productos
+   - generar reportes de inventario, stock bajo y stock crítico
 
 ## Uso
 

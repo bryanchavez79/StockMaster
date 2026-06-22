@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Reportes</h1>
+<p class="text-muted">Genera reportes TXT/CSV directamente desde la aplicación.</p>
+
+<form action="{{ url_for('generar_reporte') }}" method="post" class="row g-3 mb-4">
+  <div class="col-md-4">
+    <label class="form-label">Tipo de reporte</label>
+    <select name="tipo" class="form-select" required>
+      <option value="inventario">Inventario completo</option>
+      <option value="stock_bajo">Stock bajo</option>
+      <option value="stock_critico">Stock crítico</option>
+    </select>
+  </div>
+  <div class="col-md-2">
+    <label class="form-label">Umbral</label>
+    <input type="number" name="umbral" class="form-control" value="5" min="0">
+  </div>
+  <div class="col-md-2 align-self-end">
+    <button type="submit" class="btn btn-primary">Generar</button>
+  </div>
+</form>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Código</th>
+      <th>Nombre</th>
+      <th>Categoría</th>
+      <th>Precio</th>
+      <th>Stock</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for producto in productos %}
+      <tr>
+        <td>{{ producto.codigo }}</td>
+        <td>{{ producto.nombre }}</td>
+        <td>{{ producto.categoria }}</td>
+        <td>${{ '%.2f' | format(producto.precio) }}</td>
+        <td>{{ producto.stock }}</td>
+      </tr>
+    {% else %}
+      <tr>
+        <td colspan="5" class="text-center">No hay productos registrados.</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
