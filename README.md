@@ -29,6 +29,33 @@ Repositorio: https://github.com/bryanchavez79/StockMaster
 - Importar productos desde CSV
 - Generar reporte de inventario en texto
 
+## Instalación
+
+1. Asegúrate de tener Python 3.11 o superior instalado.
+2. Abre una terminal en la carpeta del proyecto `e:\StockMaster`.
+3. (Opcional) Crea un entorno virtual:
+
+```bash
+python -m venv .venv
+```
+
+4. Activa el entorno virtual:
+
+- PowerShell:
+  ```powershell
+  .\.venv\Scripts\Activate.ps1
+  ```
+- CMD:
+  ```cmd
+  .venv\Scripts\activate.bat
+  ```
+
+5. Ejecuta la aplicación:
+
+```bash
+python main.py
+```
+
 ## Uso
 
 1. Ejecuta la aplicación con:
