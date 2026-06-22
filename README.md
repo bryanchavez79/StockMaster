@@ -15,6 +15,16 @@ Repositorio: https://github.com/bryanchavez79/StockMaster
 - `imagenes/` - recursos gráficos o documentación visual.
 - `reportes/` - reportes de inventario en texto.
 
+## Estado actual del proyecto
+
+- Repositorio: https://github.com/bryanchavez79/StockMaster
+- Rama principal: `main`
+- Archivos clave:
+  - [`main.py`](main.py) - punto de entrada de la aplicación.
+  - [`interfaz.py`](interfaz.py) - menú principal y submenú de reportes.
+  - [`base_datos.py`](base_datos.py) - lógica de SQLite y operaciones CRUD.
+  - [`productos.py`](productos.py) - modelo `Producto` y validaciones.
+
 ## Funcionalidades actuales
 
 - Agregar producto
