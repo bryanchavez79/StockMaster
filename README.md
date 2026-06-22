@@ -6,7 +6,7 @@ Repositorio GitHub: [StockMaster](https://github.com/bryanchavez79/StockMaster)
 
 [![StockMaster](https://img.shields.io/badge/Repo-StockMaster-blue)](https://github.com/bryanchavez79/StockMaster)
 
-> **¡Pruébalo localmente!** Ejecuta `python app.py` y abre `http://127.0.0.1:5000` para ver la interfaz web.
+> **¡Pruébalo localmente!** Ejecuta `python app.py` y abre `http://stockmaster:5000` en el navegador.
 
 ## Estructura del proyecto
 
@@ -84,13 +84,29 @@ pip install Flask
 python app.py
 ```
 
-3. Abre en el navegador:
+3. Configura el nombre de host `stockmaster` en tu sistema (opcional):
+
+   - **Windows**: Abre `C:\Windows\System32\drivers\etc\hosts` como administrador y agrega:
+     ```
+     127.0.0.1 stockmaster
+     ```
+   - **macOS/Linux**: Edita `/etc/hosts` y agrega:
+     ```
+     127.0.0.1 stockmaster
+     ```
+
+4. Abre en el navegador:
 
 ```text
-http://127.0.0.1:5000
+http://stockmaster:5000
 ```
 
-4. Desde la web podrás:
+   Si no configuraste el archivo `hosts`, usa:
+   ```text
+   http://127.0.0.1:5000
+   ```
+
+5. Desde la web podrás:
    - ver y administrar productos
    - crear, editar y eliminar productos
    - generar reportes de inventario, stock bajo y stock crítico
