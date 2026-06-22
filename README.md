@@ -77,6 +77,18 @@ python main.py
      - Ambos
 5. Para importar productos desde un archivo CSV, elige la opción "Importar desde CSV".
 
+## Pruebas rápidas
+
+1. Ejecuta `python main.py`.
+2. Elige `1` para agregar un producto y completa el formulario.
+3. Elige `2` para ver la lista de productos y confirmar que el producto quedó guardado.
+4. Elige `9` para ir al submenú de reportes.
+   - Selecciona `1` para generar inventario completo.
+   - Selecciona `2` para generar stock bajo.
+   - Selecciona `3` para generar stock crítico.
+   - Luego elige el formato de salida: `1` TXT, `2` CSV o `3` Ambos.
+5. Verifica los archivos generados en las carpetas `reportes/` y `datos/`.
+
 ## Formato de CSV para importación
 
 El archivo CSV debe tener estas columnas en la primera fila:
