@@ -77,6 +77,22 @@ python main.py
      - Ambos
 5. Para importar productos desde un archivo CSV, elige la opción "Importar desde CSV".
 
+## Formato de CSV para importación
+
+El archivo CSV debe tener estas columnas en la primera fila:
+
+```csv
+codigo,nombre,categoria,precio,stock
+P001,Manzana,Fruta,0.50,100
+P002,Arroz,Alimentos,1.20,50
+```
+
+- `codigo`: identificador único del producto
+- `nombre`: nombre del producto
+- `categoria`: categoría del producto
+- `precio`: precio unitario (número decimal)
+- `stock`: cantidad en inventario (entero)
+
 ## Archivos generados
 
 - `inventario.db` se crea en la raíz del proyecto.
