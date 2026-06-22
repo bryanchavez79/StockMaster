@@ -89,6 +89,27 @@ python main.py
    - Luego elige el formato de salida: `1` TXT, `2` CSV o `3` Ambos.
 5. Verifica los archivos generados en las carpetas `reportes/` y `datos/`.
 
+## Importación desde CSV
+
+1. Prepara un archivo CSV con las columnas:
+   `codigo,nombre,categoria,precio,stock`
+2. Elige la opción `10. Importar desde CSV` en el menú principal.
+3. Ingresa la ruta del archivo CSV a importar.
+4. El sistema agregará o actualizará los productos existentes según el `codigo`.
+
+## Generación de reportes
+
+1. Elige la opción `9. Reportes` en el menú principal.
+2. Selecciona el reporte que deseas generar:
+   - `1` Inventario completo
+   - `2` Stock bajo
+   - `3` Stock crítico
+3. Elige el tipo de salida:
+   - `1` TXT
+   - `2` CSV
+   - `3` Ambos
+4. Revisa los archivos generados en `reportes/` y `datos/`.
+
 ## Formato de CSV para importación
 
 El archivo CSV debe tener estas columnas en la primera fila:
